@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import ua.wubulab.taskapplication.dto.PersonDto;
 import ua.wubulab.taskapplication.entity.Person;
 import ua.wubulab.taskapplication.repository.PersonRepository;
 
@@ -29,15 +30,16 @@ public class TaskApplication {
     }
 
 
+
+
     @Bean
     public CommandLineRunner demo(PersonRepository repository, ObjectMapper objectMapper) {
         return (args) -> {
-            repository.save(new Person("Jack", "Bauer", LocalDate.of(1990, 2, 5)));
-            repository.save(new Person("Chloe", "O'Brian", LocalDate.of(2012, 6, 6)));
-            repository.save(new Person("Kim", "Bauer", LocalDate.of(2002, 1, 1)));
-            repository.save(new Person("David", "Palmer", LocalDate.of(2022, 1, 5)));
-            repository.save(new Person("Michelle", "Dessler", LocalDate.of(2001, 1, 3)));
-
+            repository.save(new PersonDto("Jack", "Bauer", 31));
+            repository.save(new PersonDto("Chloe", "O'Brian", 9));
+            repository.save(new PersonDto("Kim", "Bauer", 19));
+            repository.save(new PersonDto("David", "Palmer", 12));
+            repository.save(new PersonDto("Michelle", "Dessler", 22));
 
             log.info("Persons found with findAll():");
             log.info("-------------------------------");
@@ -46,13 +48,11 @@ public class TaskApplication {
             }
             log.info("");
 
-
-            Person person = repository.findById(1L);
+            PersonDto person = (PersonDto) repository.findById(1L);
             log.info("Person found with findById(1L):");
             log.info("--------------------------------");
             log.info(objectMapper.writeValueAsString(person));
             log.info("");
-
 
             log.info("Person found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
@@ -66,6 +66,7 @@ public class TaskApplication {
             log.info("");
         };
     }
+
 
 }
 

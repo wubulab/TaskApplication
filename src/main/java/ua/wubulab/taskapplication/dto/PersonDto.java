@@ -1,6 +1,11 @@
 package ua.wubulab.taskapplication.dto;
 
-public class PersonDto {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import jakarta.persistence.Entity;
+import ua.wubulab.taskapplication.entity.Person;
+@Entity
+public class PersonDto extends Person {
 
     private String firstName;
     private String lastName;
@@ -13,6 +18,15 @@ public class PersonDto {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
     }
 
     public String getFirstName() {

@@ -36,14 +36,11 @@ public class Person {
 
 
 
-
     @Override
     public String toString() {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
     }
-
-
 
     public Long getId() {
         return id;
