@@ -10,10 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ua.wubulab.taskapplication.dto.PersonDto;
-import ua.wubulab.taskapplication.entity.Person;
 import ua.wubulab.taskapplication.repository.PersonRepository;
-
-import java.time.LocalDate;
 
 
 @SpringBootApplication
@@ -30,8 +27,6 @@ public class TaskApplication {
     }
 
 
-
-
     @Bean
     public CommandLineRunner demo(PersonRepository repository, ObjectMapper objectMapper) {
         return (args) -> {
@@ -43,15 +38,15 @@ public class TaskApplication {
 
             log.info("Persons found with findAll():");
             log.info("-------------------------------");
-            for (Person person : repository.findAll()) {
-                log.info(objectMapper.writeValueAsString(person));
+            for (PersonDto person : repository.findAll()) {
+                log.info(person.toString());
             }
             log.info("");
 
-            PersonDto person = (PersonDto) repository.findById(1L);
+            PersonDto person = repository.findById(1L).orElseThrow();
             log.info("Person found with findById(1L):");
             log.info("--------------------------------");
-            log.info(objectMapper.writeValueAsString(person));
+            log.info(person.toString());
             log.info("");
 
             log.info("Person found with findByLastName('Bauer'):");
@@ -66,9 +61,5 @@ public class TaskApplication {
             log.info("");
         };
     }
-
-
 }
-
-
 

@@ -25,7 +25,7 @@ public class Person {
     @JsonProperty("dateOfBirth")
     private LocalDate dateOfBirth;
 
-    public Person(){
+    public Person() {
     }
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth) {
@@ -33,7 +33,6 @@ public class Person {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
-
 
 
     @Override
