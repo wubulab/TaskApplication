@@ -2,14 +2,13 @@ package ua.wubulab.taskapplication;
 
 
 import ch.qos.logback.classic.Logger;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ua.wubulab.taskapplication.dto.PersonDto;
+import ua.wubulab.taskapplication.entity.Person;
 import ua.wubulab.taskapplication.repository.PersonRepository;
 
 
@@ -28,7 +27,7 @@ public class TaskApplication {
 
 
     @Bean
-    public CommandLineRunner demo(PersonRepository repository, ObjectMapper objectMapper) {
+    public CommandLineRunner demo(PersonRepository repository) {
         return (args) -> {
             repository.save(new PersonDto("Jack", "Bauer", 31));
             repository.save(new PersonDto("Chloe", "O'Brian", 9));
@@ -38,12 +37,12 @@ public class TaskApplication {
 
             log.info("Persons found with findAll():");
             log.info("-------------------------------");
-            for (PersonDto person : repository.findAll()) {
+            for (Person person : repository.findAll()) {
                 log.info(person.toString());
             }
             log.info("");
 
-            PersonDto person = repository.findById(1L).orElseThrow();
+            PersonDto person = (PersonDto) repository.findById(1L);
             log.info("Person found with findById(1L):");
             log.info("--------------------------------");
             log.info(person.toString());
@@ -52,11 +51,7 @@ public class TaskApplication {
             log.info("Person found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
             repository.findByLastName("Bauer").forEach(bauer -> {
-                try {
-                    log.info(objectMapper.writeValueAsString(bauer));
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
+                log.info(bauer.toString());
             });
             log.info("");
         };

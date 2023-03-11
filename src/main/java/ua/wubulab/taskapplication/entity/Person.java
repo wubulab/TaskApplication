@@ -18,7 +18,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonProperty("first_name")
+    @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
     private String lastName;

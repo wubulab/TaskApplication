@@ -5,13 +5,11 @@ import ua.wubulab.taskapplication.dto.PersonDto;
 import ua.wubulab.taskapplication.entity.Person;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface PersonRepository extends JpaRepository<PersonDto, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
     List<PersonDto> findByLastName(String lastName);
 
-    Optional<PersonDto> findById(Long id);
-
+    PersonDto findById(long id);
 
 }

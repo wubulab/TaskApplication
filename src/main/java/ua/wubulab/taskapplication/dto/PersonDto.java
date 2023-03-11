@@ -1,5 +1,7 @@
 package ua.wubulab.taskapplication.dto;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jakarta.persistence.Entity;
 import ua.wubulab.taskapplication.entity.Person;
 
@@ -19,7 +21,6 @@ public class PersonDto extends Person {
         this.setAge(age);
     }
 
-
     @Override
     public String toString() {
         return "PersonDto{" +
@@ -29,22 +30,18 @@ public class PersonDto extends Person {
                 '}';
     }
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
 
-    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    @Override
     public String getLastName() {
         return lastName;
     }
 
-    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -56,4 +53,5 @@ public class PersonDto extends Person {
     public void setAge(int age) {
         this.age = age;
     }
+
 }
